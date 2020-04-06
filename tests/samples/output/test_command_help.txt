@@ -1,0 +1,17 @@
+usage: timewalk record [-h] [--config FILE] [--database FILE]
+                       [--log-file FILE] [--verbose] [--write]
+                       [--invoker INVOKER] [--project PROJECT]
+                       [--language LANGUAGE]
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --config FILE        Defaults to ~/.timewalk/config.ini
+  --database FILE      Defaults to ~/.timewalk/timewalk.db
+  --log-file FILE      Defaults to ~/.timewalk/timewalk.log.
+  --verbose            Turns on debug messages in log file.
+  --write              When set, triggered from writing to a file.
+  --invoker INVOKER    The editor plugin that invokes the core program and its
+                       version
+  --project PROJECT    Optional project name.
+  --language LANGUAGE  Optional language name. If valid, takes priority over
+                       auto-detected language.

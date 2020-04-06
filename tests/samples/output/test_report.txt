@@ -1,0 +1,25 @@
+# TimeWalk Report
+
+Dec 24, 2000 20:02:40 - Dec 31, 2000 20:02:40
+
+## Core
+
+In the given time period
+    - Total coding time in second: 50
+    - Fraction of your life spent in coding: 0.0
+
+
+## Editor - CoreInvoker
+
+No editor data recorded :(
+
+## Language - CoreLanguage
+
+Stats of your languages usage
+
+| Lang  | Seconds | %    |
+| ------|---------|----- |
+| Swift | 30      | 60.0 |
+| Go    | 20      | 40.0 |
+
+

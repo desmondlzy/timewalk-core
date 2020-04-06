@@ -1,0 +1,9 @@
+usage: timewalk <command> [options]
+ 
+There are some useful timewalk commands:
+
+    record          Generate one heartbeat and record coding activity
+    query           Query for the coding stats in json over some time range 
+    report          Generate a human readable report over a time range
+
+Use `timewalk <command> --help' to see help for a specific command
