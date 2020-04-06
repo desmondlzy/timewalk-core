@@ -1,0 +1,11 @@
+[run]
+branch = true
+omit =
+    timewalk/cli.py
+    timewalk/packages/*
+    timewalk/tests/samples/*
+[report]
+omit =
+    timewalk/cli.py
+    timewalk/packages/*
+    */python?.?/*
