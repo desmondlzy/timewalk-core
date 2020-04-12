@@ -5,6 +5,7 @@
 ## Core
 
 In the given time period
+
 - Total coding time in second: 10800
 - Fraction of your life spent in coding: 0.018
 

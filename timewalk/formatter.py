@@ -81,7 +81,7 @@ class MarkdownReportFormatter():
 
 
     def _add_list(self, list_items, indent=0):
-        buffer = ""
+        buffer = "\n"
         for item in list_items:
             type = item.get("type", "")
             if type == "literal":

@@ -8,6 +8,8 @@ logger = logging.getLogger("TimeWalk")
 class TimeWalk:
 
     _tokens = None
+    _session_timeout = 150
+    last_update = None
 
     def __init__(self, args, configs):
         self.args = args
@@ -32,8 +34,20 @@ class TimeWalk:
                     logger.debug("Calling plugin {}:{} for event {}".format(plugin, handler_name, event))
                     getattr(plugin, handler_name)(self)
                 except Exception as e:
-                    logger.warning("Plugin '{}' yields an error from '{}' in handling '{}': {}".format(
+                    logger.warning("Plugin '{}' yields an error from '{}' when handling '{}': {}".format(
                         plugin.name, handler_name, event, e))
+
+    def session_timeout_reached(self):
+        assert self.last_update is not None
+        return self.args.timestamp - self.last_update > self.session_timeout
+
+    @property
+    def session_timeout(self):
+        return self._session_timeout
+
+    @session_timeout.setter
+    def session_timeout(self, val):
+        raise ValueError("heartbeat_interval is read-only")
 
     def get_user_home(self):
         return get_user_home()

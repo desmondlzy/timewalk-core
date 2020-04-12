@@ -96,6 +96,7 @@ class PluginManager:
 
             try:
                 plugins.append(import_module(name, pkg).__dict__[cls](self.args))
+                logger.debug("Plugin '{}' loaded".format(plugin))
             except ImportError:
                 logger.error("Couldn't find plugin '{}'".format(name))
 
