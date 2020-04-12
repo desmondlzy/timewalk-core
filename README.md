@@ -1,19 +1,20 @@
 TimeWalk
 ==========
 [![Build Status](https://travis-ci.org/desmondlzy/timewalk-core.svg?branch=master)](https://travis-ci.org/desmondlzy/timewalk-core)
+[![Coverage Status](https://coveralls.io/repos/github/desmondlzy/timewalk-core/badge.svg?branch=dev)](https://coveralls.io/github/desmondlzy/timewalk-core?branch=dev)
 
 This is the core program of TimeWalk, a free, extensible software that helps you track you coding statistics.
 Everything is done locally and you have full control of your own data.
 
 The core hosted in this repo provides you with a command line interface to invoke TimeWalk.
 
-To make TimeWalk work, find a plugin for your text editor (under development).
+To make TimeWalk work, find a plugin for your text editor (VS Code coming soon).
 
 
 Installation
 ------------
 
-Note: General users should **not** directly install the plugin from here (under development).
+Note: General users should **not** directly install the plugin from here (on their way).
 
 Your text editor plugins will download the core upon their installation or activation.
 Then the core will be invoked by the editor plugins via command line interface and make all the magic happen.
@@ -64,7 +65,7 @@ allowing detecting and tracking the languages and text editors you are using.
 
 ### Develop your own plugins
 
-You may also extend TimeWalk by writing your plugins that tailer your need.
+You may also extend TimeWalk by writing your plugins that tailor to your needs.
 
 A plugin developer guide will be made available recently. Stay tuned!
 
@@ -79,22 +80,30 @@ Find the corresponding section of the plugin and set ``enabled=false``
 Known Issues / Coming Features
 ---------------
 - Command line interface for plugin management
-- Finish testing on macOS/Linux
+    - Change the design of the current plugin system
+    - Plugins could be distributed through `pip`
+- Finish testing on macOS/~~Linux~~
 - Editor plugins
 
 
 Contributing
 ------------
-You help and contribution is more than welcomed!
+You help and contribution are more than welcomed!
 
 We appreciate your suggestions/feature request/code contribution. 
 Your ideas are making TimeWalk better, as well as our open-source community.
 
-I've noticed there are projects around having similar functionality as
-TimeWalk. But I think there is lot to improve! Users may not send their coding
-data to a third party to get their stats. Users may not pay to get their stats.
-Users may freely customize what kind of stats they indend to track. 
-All those beliefs are what motivates TimeWalk.
+I have noticed there are open-source projects around having similar (or better)
+functionality as TimeWalk does. I very appreciate their work, but on the other hand
+, there are still a couple of significant improvements to be made.
+
+- Users may not send their data to a third party to get their stats. 
+- Users may not pay to get their stats.
+- Users may freely customize what kind of stats they intend to track. 
+
+These simple beliefs are really what motivates TimeWalk. 
+If you feel the same way as I do, please don't hesitate to contact me and
+give your precious opinions.
 
 Testing
 -------------
