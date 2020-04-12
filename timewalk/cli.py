@@ -6,7 +6,7 @@
     Command-line entry point of TimeWalk.
 
     This code file is heavily borrowed from wakatime.cli
-    (wakatime.cli URL)
+    https://github.com/wakatime/wakatime/blob/master/wakatime/cli.py
 
 """
 

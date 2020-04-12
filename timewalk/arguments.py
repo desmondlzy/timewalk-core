@@ -15,6 +15,8 @@ class FileAction(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
         if isinstance(values, str) and values.startswith('"'):
             values = re.sub(r'\\"', '"', values.strip('"'))
+        if os.path.isdir(values):
+            raise FileNotFoundError("Input file is a directory: '{}'".format(values))
         try:
             if os.path.isfile(values):
                 values = os.path.realpath(values)
@@ -81,14 +83,14 @@ def parse_arguments(raw_argv):
                             help='Defaults to ~/.timewalk/timewalk.log.')
         psr.add_argument('--verbose', dest='verbose', action='store_true',
                             help='Turns on debug messages in log file.')
+        psr.add_argument('--invoker', dest='invoker', action=StoreWithoutQuotes,
+                                   help='The editor plugin that invokes the core program and its version')
 
 
     parser_record.add_argument('--file', dest='file', action=FileAction,
                         help=argparse.SUPPRESS, required=True)
     parser_record.add_argument('--write', dest='is_write', action='store_true',
                         help='When set, triggered from writing to a file.')
-    parser_record.add_argument('--invoker', dest='invoker', action=StoreWithoutQuotes,
-                        help='The editor plugin that invokes the core program and its version')
     parser_record.add_argument('--project', dest='project', action=StoreWithoutQuotes,
                      help='Optional project name.')
     parser_record.add_argument('--language', dest='language',
@@ -96,7 +98,7 @@ def parse_arguments(raw_argv):
                      help='Optional language name. If valid, takes ' +
                           'priority over auto-detected language.')
 
-    parser_query.add_argument('--start-time', dest='start_time', metavar="time",
+    parser_query.add_argument('--start-time', dest='start_time', metavar="time", action=ParseTimestamp,
                       help='Start time for query. Unix timestamp, default to the time of' +
                            'the first record')
     parser_query.add_argument('--end-time', dest='end_time', metavar="time",
@@ -107,7 +109,7 @@ def parse_arguments(raw_argv):
 
     parser_report.add_argument('--format', dest='format', choices=['markdown'], default='markdown',
                               help='Format of the report, choose from "markdown" (for human)')
-    parser_report.add_argument('--start-time', dest='start_time', metavar="time",
+    parser_report.add_argument('--start-time', dest='start_time', metavar="time", action=ParseTimestamp,
                               help='Start time for query. Unix timestamp, default to the time of' +
                                    '7 days before --end-time')
     parser_report.add_argument('--end-time', dest='end_time', metavar="time",
@@ -164,6 +166,11 @@ def parse_arguments(raw_argv):
             args.end_time = args.timestamp
         if not args.start_time:
             args.start_time = args.end_time - datetime.timedelta(days=7).total_seconds()
+
+        if args.start_time > args.end_time:
+            raise ValueError("start_time ({}) should be smaller than end_time ({})".format(
+                args.start_time, args.end_time
+            ))
 
     elif args.command == "plugin":
         # TODO: plugin related command

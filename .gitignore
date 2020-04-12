@@ -33,6 +33,7 @@ htmlcov/
 .idea/
 .vs/
 .vscode/
+.dev_scripts/
 
 virtualenv
 venv/

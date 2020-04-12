@@ -31,6 +31,10 @@ class CoreInvoker():
 
         if len(invoker_time_percent) > 0:
             items.append({
+                "type": "literal",
+                "content": "Your fav editor is {}!".format(invoker_time_percent[0][0])
+            })
+            items.append({
                 "type": "table",
                 "header": ("Editor", "Seconds", "%"),
                 "data": invoker_time_percent
@@ -55,7 +59,9 @@ class CoreInvoker():
                 invoker = hb[i]["invoker"]
                 result[invoker] += hb[i]["time"] - hb[i - 1]["time"]
 
-        return dict(result)
+        return {
+            "invoker": dict(result)
+        }
 
     def _combine_sessions(self, sessions):
         result = defaultdict(int)

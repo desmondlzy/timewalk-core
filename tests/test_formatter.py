@@ -80,7 +80,7 @@ class TestFormatter(TestCase):
                 'items': [
                     {
                         'type': 'literal',
-                        "content": "Stats of your languages usage",
+                        "content": "Check out your favourite language",
                     },
                     {
                         'type': 'table',
@@ -97,5 +97,7 @@ class TestFormatter(TestCase):
         ]
         self.assertListEqual(context.report_sections, expected)
         output = formatter.format(context.report_sections)
+
+        # compare output and sample file
         with open("./tests/samples/output/test_formatter_output.txt", "r") as f:
-            self.assertEqual(output, f.read())
+            self.assertEqual(f.read(), output)

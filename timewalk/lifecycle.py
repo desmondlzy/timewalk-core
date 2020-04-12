@@ -38,10 +38,12 @@ class LifeCycle:
                 raise e
 
     def get_heartbeat(self):
+        logger.debug("Phase get_heartbeat")
         self.ctx.heartbeats = self.ctx.adapter.get_heartbeat()
         self.ctx.last_update = self.ctx.heartbeats[-1]["time"] if self.ctx.heartbeats != [] else 0
 
     def before_write_heartbeat(self):
+        logger.debug("Phase before_write_heartbeat")
         self.ctx.current_heartbeat = {
             "time": self.ctx.args.timestamp
         }
@@ -49,21 +51,25 @@ class LifeCycle:
         self.ctx.call_plugins("before_write_heartbeat", "gather_heartbeat")
 
     def write_heartbeat(self):
+        logger.debug("Phase write_heartbeat")
         if self.ctx.args.timestamp - self.ctx.last_update > 60:
             self.ctx.adapter.clear_heartbeat()
 
         self.ctx.adapter.write_heartbeat(self.ctx.current_heartbeat)
 
     def before_write_session(self):
+        logger.debug("Phase before_write_session")
         if self.ctx.args.timestamp - self.ctx.last_update > 60:
             self.ctx.current_session = self.ctx.adapter.combine_heartbeat(self.ctx.heartbeats)
             self.ctx.call_plugins("before_write_session", "merge_heartbeats")
 
     def write_session(self):
+        logger.debug("Phase write_session")
         if self.ctx.args.timestamp - self.ctx.last_update > 60:
             self.ctx.adapter.write_session(self.ctx.current_session)
 
     def query(self):
+        logger.debug("Phase query")
         self.ctx.heartbeats = self.ctx.adapter.get_heartbeat(
             self.ctx.args.start_time,
             self.ctx.args.end_time,
@@ -81,17 +87,21 @@ class LifeCycle:
 
     # gather information from sessions and heartbeats
     def before_format(self):
+        logger.debug("Phase before_format")
         self.ctx.call_plugins("before_format", "merge_heartbeats")
         self.ctx.call_plugins("before_format", "write_report_section")
 
     def format(self):
+        logger.debug("Phase format")
         content = self.ctx.sessions if self.ctx.args.command == "query" else self.ctx.report_sections
         self.ctx.formatted_data = self.ctx.formatter.format(content)
 
     def before_output(self):
+        logger.debug("Phase before_output")
         self.ctx.call_plugins("before_output", "before_output")
 
     def output(self):
+        logger.debug("Phase output")
         if self.ctx.args.outfile:
             with open(self.ctx.args.outfile, "w") as fp:
                 fp.write(self.ctx.formatted_data)

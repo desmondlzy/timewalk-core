@@ -78,6 +78,7 @@ class PluginManager:
                     logger.error("Couldn't find plugin '{}'".format(name))
 
     def load_plugins(self, role):
+        logger.info("Loading {}".format(role))
         plugins = []
         if role == "formatter":
             return self._load_formatter()
