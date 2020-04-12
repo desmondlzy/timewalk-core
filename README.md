@@ -1,5 +1,6 @@
 TimeWalk
 ==========
+[![Build Status](https://travis-ci.org/desmondlzy/timewalk-core.svg?branch=master)](https://travis-ci.org/desmondlzy/timewalk-core)
 
 This is the core program of TimeWalk, a free, extensible software that helps you track you coding statistics.
 Everything is done locally and you have full control of your own data.
