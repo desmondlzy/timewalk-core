@@ -22,11 +22,14 @@ class TimeWalk:
 
         self.plugins = self._manager.load_plugins("general_plugin")
 
+        logger.info("TimeWalk initialized")
+
     def call_plugins(self, event, handler_name):
         self.current_event = event
         for plugin in self.plugins:
             if hasattr(plugin, handler_name):
                 try:
+                    logger.debug("Calling plugin {}:{} for event {}".format(plugin, handler_name, event))
                     getattr(plugin, handler_name)(self)
                 except Exception as e:
                     logger.warning("Plugin '{}' yields an error from '{}' in handling '{}': {}".format(

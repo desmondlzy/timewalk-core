@@ -1,6 +1,5 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from .utils import TestCase, MockedNamespace, TestingDB
-from testfixtures import TempDirectory
 
 from timewalk.formatter import JSONFormatter, MarkdownReportFormatter
 from timewalk.plugins.language import CoreLanguage
@@ -80,7 +79,7 @@ class TestFormatter(TestCase):
                 'items': [
                     {
                         'type': 'literal',
-                        "content": "Stats of your languages usage",
+                        "content": "Check out your favourite language",
                     },
                     {
                         'type': 'table',
@@ -97,5 +96,10 @@ class TestFormatter(TestCase):
         ]
         self.assertListEqual(context.report_sections, expected)
         output = formatter.format(context.report_sections)
+
+        # compare output and sample file
         with open("./tests/samples/output/test_formatter_output.txt", "r") as f:
-            self.assertEqual(output, f.read())
+            expected_start = datetime.fromtimestamp(pivot - delta(days=7)).strftime("%b %d, %Y %H:%M:%S")
+            expected_end   = datetime.fromtimestamp(pivot).strftime("%b %d, %Y %H:%M:%S")
+            expected_output = f.read().format(expected_start, expected_end)
+            self.assertEqual(output, expected_output)

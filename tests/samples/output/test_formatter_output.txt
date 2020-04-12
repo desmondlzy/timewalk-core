@@ -1,17 +1,17 @@
 # TimeWalk Report
 
-Sep 01, 2001 21:46:40 - Sep 08, 2001 21:46:40
+{} - {}
 
 ## Core
 
 In the given time period
-    - Total coding time in second: 10800
-    - Fraction of your life spent in coding: 0.018
+- Total coding time in second: 10800
+- Fraction of your life spent in coding: 0.018
 
 
 ## Language - CoreLanguage
 
-Stats of your languages usage
+Check out your favourite language
 
 | Lang   | Seconds | %     |
 | -------|---------|------ |

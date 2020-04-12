@@ -6,6 +6,8 @@ logger = logging.getLogger("TimeWalk")
 
 
 class SqliteAdapter():
+    version = "0.0.1"
+
     def __init__(self, args):
         self.args = args
         self.timestamp = args.timestamp
@@ -25,14 +27,14 @@ class SqliteAdapter():
     def _init_database(self):
         sql_init_tables = """
         CREATE TABLE IF NOT EXISTS heartbeat (
-            id   INT PRIMARY KEY,
-            time INT NOT NULL,
+            id   INTEGER PRIMARY KEY AUTOINCREMENT,
+            time INTEGER NOT NULL,
             json TEXT NOT NULL
         );
         CREATE TABLE IF NOT EXISTS session (
-            id    INT PRIMARY KEY,
-            start INT NOT NULL,
-            end   INT NOT NULL,
+            id    INTEGER PRIMARY KEY AUTOINCREMENT,
+            start INTEGER NOT NULL,
+            end   INTEGER NOT NULL,
             json  TEXT NOT NULL
         );
         """

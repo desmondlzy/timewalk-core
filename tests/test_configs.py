@@ -11,7 +11,7 @@ from timewalk.configs import parse_configs
 from timewalk.configs import parse_configs, save_configs
 
 
-class MyTestCase(TestCase):
+class TestConfigs(TestCase):
     def test_parse_configs_normally(self):
         settings = [
             {

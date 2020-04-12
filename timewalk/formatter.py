@@ -80,7 +80,7 @@ class MarkdownReportFormatter():
             return buffer
 
 
-    def _add_list(self, list_items, indent=4):
+    def _add_list(self, list_items, indent=0):
         buffer = ""
         for item in list_items:
             type = item.get("type", "")

@@ -28,18 +28,16 @@ class CoreLanguage():
             for lang, dur in sorted(lang_duration.items(), key=lambda kv: (kv[1], kv[0]), reverse=True)
         ]
 
-        items.append(
-            {
+        if len(lang_time_percent) > 0:
+            items.append({
                 "type": "literal",
-                "content": "Stats of your languages usage"
-            }
-        )
-
-        items.append({
-            "type": "table",
-            "header": ("Lang", "Seconds", "%"),
-            "data": lang_time_percent
-        })
+                "content": "Check out your favourite language"
+            })
+            items.append({
+                "type": "table",
+                "header": ("Lang", "Seconds", "%"),
+                "data": lang_time_percent
+            })
 
         ctx.report_sections.append(
             {
@@ -48,10 +46,10 @@ class CoreLanguage():
             }
         )
 
-    def _duration_to_string(self, seconds):
-        min, sec = divmod(seconds, 60)
-        hr, min = divmod(min, 60)
-        return "{} hr {} min {} sec".format(hr, min, sec)
+    # def _duration_to_string(self, seconds):
+    #     min, sec = divmod(seconds, 60)
+    #     hr, min = divmod(min, 60)
+    #     return "{} hr {} min {} sec".format(hr, min, sec)
 
     def _combine_heartbeats(self, heartbeats):
         result = defaultdict(int)
