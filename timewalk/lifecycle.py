@@ -12,6 +12,7 @@ class LifeCycle:
         self.ctx = timewalk
 
     def start(self, command):
+        logger.info("Executing command '{}'".format(command))
         if command == "record":
             try:
                 self.get_heartbeat()
@@ -19,7 +20,6 @@ class LifeCycle:
                 self.write_heartbeat()
                 self.before_write_session()  # combine heartbeats to session here
                 self.write_session()
-                return SUCCESS
 
             except Exception as e:
                 raise e
@@ -31,11 +31,14 @@ class LifeCycle:
                 self.format()
                 self.before_output()
                 self.output()
-                return SUCCESS
 
             except Exception as e:
                 traceback.print_exc()
                 raise e
+
+        logger.info("TimeWalk execution finished!")
+
+        return SUCCESS
 
     def get_heartbeat(self):
         logger.debug("Phase get_heartbeat")
@@ -52,20 +55,21 @@ class LifeCycle:
 
     def write_heartbeat(self):
         logger.debug("Phase write_heartbeat")
-        if self.ctx.args.timestamp - self.ctx.last_update > 60:
+        if self.ctx.session_timeout_reached():
             self.ctx.adapter.clear_heartbeat()
 
         self.ctx.adapter.write_heartbeat(self.ctx.current_heartbeat)
 
     def before_write_session(self):
         logger.debug("Phase before_write_session")
-        if self.ctx.args.timestamp - self.ctx.last_update > 60:
+        if self.ctx.session_timeout_reached():
             self.ctx.current_session = self.ctx.adapter.combine_heartbeat(self.ctx.heartbeats)
-            self.ctx.call_plugins("before_write_session", "merge_heartbeats")
+            if self.ctx.current_session != {}:
+                self.ctx.call_plugins("before_write_session", "merge_heartbeats")
 
     def write_session(self):
         logger.debug("Phase write_session")
-        if self.ctx.args.timestamp - self.ctx.last_update > 60:
+        if self.ctx.session_timeout_reached():
             self.ctx.adapter.write_session(self.ctx.current_session)
 
     def query(self):

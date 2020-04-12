@@ -9,7 +9,7 @@ class CoreInvoker():
         self.args = args
 
     def gather_heartbeat(self, ctx):
-        if ctx.args.__contains__("invoker"):
+        if ctx.args.__contains__("invoker") and ctx.args.invoker is not None:
             editor = ctx.args.invoker.split("/")[0]
             ctx.current_heartbeat.update({
                 "invoker": editor

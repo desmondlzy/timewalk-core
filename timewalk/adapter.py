@@ -91,7 +91,7 @@ class SqliteAdapter():
         return sessions
 
     def write_session(self, session):
-        if session == None:
+        if session == {}:
             return
 
         assert session.__contains__("start")
@@ -104,7 +104,7 @@ class SqliteAdapter():
         return cur.lastrowid
 
     def combine_heartbeat(self, heartbeats):
-        # filter and sort heartbeatsd records chronologically
+        # filter and sort heartbeat records chronologically
         heartbeats.sort(key=lambda rec: rec["time"])
 
         session = {}
@@ -112,7 +112,5 @@ class SqliteAdapter():
             session["start"] = heartbeats[0]["time"]
             session["end"] = heartbeats[-1]["time"]
             session["duration"] = session["end"] - session["start"]
-        else:
-            session = None
 
         return session

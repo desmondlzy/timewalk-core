@@ -14,9 +14,9 @@ To make TimeWalk work, find a plugin for your text editor (VS Code coming soon).
 Installation
 ------------
 
-Note: General users should **not** directly install the plugin from here (on their way).
+Note: General users should **not** directly install the plugin from here.
 
-Your text editor plugins will download the core upon their installation or activation.
+Your text editor plugins (on their way) will download the core upon their installation or activation.
 Then the core will be invoked by the editor plugins via command line interface and make all the magic happen.
 
 For plugin developers who may want to get the core program.
@@ -41,7 +41,7 @@ timewalk record --file my_script.py
 
 The above command will make TimeWalk generate one *heartbeat* and stored in the database.
 By calling the command along your coding (done by your editor plugin so no worries),
-TimeWalk collects heartbeats and stores them as sessions.
+TimeWalk collects heartbeats and stores them as *sessions*.
 
 After recording a couple of heartbeats, see your coding statistic in json as follows,
 
@@ -80,8 +80,8 @@ Find the corresponding section of the plugin and set ``enabled=false``
 Known Issues / Coming Features
 ---------------
 - Command line interface for plugin management
-    - Change the design of the current plugin system
-    - Plugins could be distributed through `pip`
+    - Re-design of the current plugin system
+    - Distribution through `pip`
 - Finish testing on macOS/~~Linux~~
 - Editor plugins
 
@@ -90,8 +90,6 @@ Contributing
 ------------
 You help and contribution are more than welcomed!
 
-We appreciate your suggestions/feature request/code contribution. 
-Your ideas are making TimeWalk better, as well as our open-source community.
 
 I have noticed there are open-source projects around having similar (or better)
 functionality as TimeWalk does. I very appreciate their work, but on the other hand
@@ -102,8 +100,9 @@ functionality as TimeWalk does. I very appreciate their work, but on the other h
 - Users may freely customize what kind of stats they intend to track. 
 
 These simple beliefs are really what motivates TimeWalk. 
-If you feel the same way as I do, please don't hesitate to contact me and
-give your precious opinions.
+If you feel the same way as I do, please leave your precious commments.
+Your suggestions/feature request/code contribution would be appreicated. 
+I believe your ideas will make TimeWalk better, as well as our open-source community.
 
 Testing
 -------------
