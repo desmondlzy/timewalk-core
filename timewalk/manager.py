@@ -42,28 +42,28 @@ class PluginManager:
         return True
 
 
-    def register(self, classname, mapping):
-        # TODO: implement plugin register function for external plugin (provided absolute path and classname)
-        pass
+    # def register(self, classname, mapping):
+    #     TODO: implement plugin register function for external plugin (provided absolute path and classname)
+        # pass
 
-    def unregister(self, name):
+    # def unregister(self, name):
         # TODO: implement plugin unregister function (delete corresponding section in config file)
-        pass
+        # pass
 
-    def _change_activation(self, name, value):
-        assert isinstance(value, bool)
-        try:
-            role = self.configs.get(name, "role")
-            if role == "general_plugin":
-                self.configs.set(name, "enabled", str(value))
-        except configparser.NoSectionError:
-            print("No plugin of name {} is registered. Please check if it is a typo.".format(name))
+    # def _change_activation(self, name, value):
+        # assert isinstance(value, bool)
+        # try:
+        #     role = self.configs.get(name, "role")
+        #     if role == "general_plugin":
+        #         self.configs.set(name, "enabled", str(value))
+        # except configparser.NoSectionError:
+        #     print("No plugin of name {} is registered. Please check if it is a typo.".format(name))
 
-    def activate(self, name):
-        self._change_activation(name, True)
-
-    def deactivate(self, name):
-        self._change_activation(name, False)
+    # def activate(self, name):
+    #     self._change_activation(name, True)
+    #
+    # def deactivate(self, name):
+    #     self._change_activation(name, False)
 
     def _load_formatter(self):
         class_name = "JSONFormatter" if self.args.command == "query" else "MarkdownReportFormatter"

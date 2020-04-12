@@ -14,7 +14,7 @@ def get_timewalk_home():
     if home:
         base = os.path.expanduser(home)
     else:
-        base = os.path.join(os.path.expanduser('~'), DIRNAME_HOME)
+        base = os.path.join(get_user_home(), DIRNAME_HOME)
         if not os.path.exists(base):
             os.makedirs(base)
 

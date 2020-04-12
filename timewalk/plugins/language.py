@@ -46,10 +46,10 @@ class CoreLanguage():
             }
         )
 
-    def _duration_to_string(self, seconds):
-        min, sec = divmod(seconds, 60)
-        hr, min = divmod(min, 60)
-        return "{} hr {} min {} sec".format(hr, min, sec)
+    # def _duration_to_string(self, seconds):
+    #     min, sec = divmod(seconds, 60)
+    #     hr, min = divmod(min, 60)
+    #     return "{} hr {} min {} sec".format(hr, min, sec)
 
     def _combine_heartbeats(self, heartbeats):
         result = defaultdict(int)
