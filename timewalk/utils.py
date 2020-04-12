@@ -31,3 +31,4 @@ def get_default_log():
 
 def get_default_config():
     return os.path.join(get_timewalk_home(), FILENAME_CONFIG)
+

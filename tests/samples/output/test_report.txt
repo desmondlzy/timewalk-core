@@ -1,6 +1,6 @@
 # TimeWalk Report
 
-Dec 25, 2000 09:02:40 - Jan 01, 2001 09:02:40
+{} - {}
 
 ## Core
 

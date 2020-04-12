@@ -1,7 +1,7 @@
 import unittest
 import os, sys
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from testfixtures import Replace, test_time, OutputCapture, LogCapture
 from .utils import TempDirectory, TestingDB
 
@@ -128,13 +128,13 @@ class TestIntegration(unittest.TestCase):
 
     def test_report(self):
         with TestingDB("empty.db") as db, Replace(
-                "timewalk.arguments.time", test_time(delta=50, delta_type="seconds")) as d:
-            start_time = datetime(2001, 1, 1)
+                "timewalk.arguments.time", test_time(None)) as d:
             codefiles = ("python.py", "go.go", "swift.swift")
 
             seconds = [0, 20, 50]
             for file, t in zip(codefiles, seconds):
-                d.set(2001, 1, 1, 1, 1, t)
+                start_date = datetime(2001, 1, 1, 0, 0, t, 0)
+                d.set(start_date)
                 argv = [
                     "record",
                     "--file", os.path.join("tests", "samples", "codefiles", file),
@@ -144,6 +144,8 @@ class TestIntegration(unittest.TestCase):
                 ]
                 retval = execute(argv)
 
+            start_date = datetime(2001, 1, 1, 0, 0, 55, 0)
+            d.set(start_date)
             argv = [
                 "report",
                 "--database", db.path,
@@ -154,4 +156,11 @@ class TestIntegration(unittest.TestCase):
                 output_text = o.captured
 
             with open("./tests/samples/output/test_report.txt", "r") as f:
-                self.assertEqual(f.read(), output_text)
+                sevendays = timedelta(days=7)
+                expected_start = datetime.fromtimestamp(
+                    (start_date - sevendays).replace(tzinfo=timezone.utc).timestamp()).strftime("%b %d, %Y %H:%M:%S")
+                expected_end = datetime.fromtimestamp(
+                    start_date.replace(tzinfo=timezone.utc).timestamp()).strftime("%b %d, %Y %H:%M:%S")
+                print(expected_start, expected_end)
+                expected = f.read().format(expected_start, expected_end)
+                self.assertEqual(output_text, expected)
