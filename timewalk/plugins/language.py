@@ -38,6 +38,11 @@ class CoreLanguage():
                 "header": ("Lang", "Seconds", "%"),
                 "data": lang_time_percent
             })
+        else:
+            items.append({
+                "type": "literal",
+                "content": "No language data recorded"
+            })
 
         ctx.report_sections.append(
             {

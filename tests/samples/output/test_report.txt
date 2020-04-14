@@ -10,15 +10,6 @@ In the given time period
 - Fraction of your life spent in coding: 0.0
 
 
-## Editor - CoreInvoker
-
-Your fav editor is testAgent!
-
-| Editor    | Seconds | %     |
-| ----------|---------|------ |
-| testAgent | 50      | 100.0 |
-
-
 ## Language - CoreLanguage
 
 Check out your favourite language
@@ -27,5 +18,23 @@ Check out your favourite language
 | ------|---------|----- |
 | Swift | 30      | 60.0 |
 | Go    | 20      | 40.0 |
+
+
+## Project - CoreProject
+
+Check out the projects you've been working on!
+
+| Project   | Seconds | %     |
+| ----------|---------|------ |
+| My Plugin | 50      | 100.0 |
+
+
+## Editor - CoreInvoker
+
+Your fav editor is testAgent!
+
+| Editor    | Seconds | %     |
+| ----------|---------|------ |
+| testAgent | 50      | 100.0 |
 
 
