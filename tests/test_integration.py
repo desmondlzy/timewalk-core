@@ -80,6 +80,7 @@ class TestIntegration(unittest.TestCase):
                     "end": int(start_time.replace(tzinfo=timezone.utc).timestamp()) + 50 * (len(codefiles) - 1),
                     "duration": (50 * (len(codefiles) - 1)),
                     "invoker": {},
+                    "project": {},
                     "language": {"Go": 50, "Swift": 50},
                 },
             ]
@@ -90,13 +91,16 @@ class TestIntegration(unittest.TestCase):
             start_time = datetime(2001, 1, 1)
             with Replace("timewalk.arguments.time", test_time(delta=50, delta_type="seconds")):
                 codefiles = ("python.py", "go.go", "swift.swift")
-                for file in codefiles:
+                projects = ("Plugin", None, "Plugin")
+                for file, proj in zip(codefiles, projects):
                     argv = [
                         "record",
                         "--file", os.path.join("tests", "samples", "codefiles", file),
                         "--database", db.path,
                         "--config", "tests/samples/configs/empty.ini"
                     ]
+                    if proj:
+                        argv += ["--project", proj]
                     retval = execute(argv)
 
                 output_file_name = "./test_query_output_to_file.txt"
@@ -118,6 +122,7 @@ class TestIntegration(unittest.TestCase):
                         "end": int(start_time.replace(tzinfo=timezone.utc).timestamp()) + 50 * (len(codefiles) - 1),
                         "duration": (50 * (len(codefiles) - 1)),
                         "invoker": {},
+                        "project": {"Plugin": 50},
                         "language": {"Go": 50, "Swift": 50},
                     },
                 ]
@@ -139,6 +144,7 @@ class TestIntegration(unittest.TestCase):
                     "record",
                     "--file", os.path.join("tests", "samples", "codefiles", file),
                     "--database", db.path,
+                    "--project", "My Plugin",
                     "--invoker", '"testAgent/1.0.0-alpha timewalk-testAgent/0.5.0"',
                     "--config", "tests/samples/configs/empty.ini"
                 ]
@@ -161,6 +167,10 @@ class TestIntegration(unittest.TestCase):
                     (start_date - sevendays).replace(tzinfo=timezone.utc).timestamp()).strftime("%b %d, %Y %H:%M:%S")
                 expected_end = datetime.fromtimestamp(
                     start_date.replace(tzinfo=timezone.utc).timestamp()).strftime("%b %d, %Y %H:%M:%S")
-                print(expected_start, expected_end)
                 expected = f.read().format(expected_start, expected_end)
                 self.assertEqual(output_text, expected)
+
+    def test_large_report(self):
+        with TestingDB("empty.db") as db, Replace(
+                "timewalk.arguments.time", test_time(None)) as d:
+            codefiles = ("python.py", "go.go", "swift.swift")

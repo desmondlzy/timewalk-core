@@ -31,14 +31,20 @@ internal_plugin_info = [
     },
     {
         "role": "general_plugin",
-        "relative_import_name": ".plugins.invoker",
-        "class_name": "CoreInvoker",
+        "relative_import_name": ".plugins.language",
+        "class_name": "CoreLanguage",
         "enabled": True,
     },
     {
         "role": "general_plugin",
-        "relative_import_name": ".plugins.language",
-        "class_name": "CoreLanguage",
+        "relative_import_name": ".plugins.project",
+        "class_name": "CoreProject",
+        "enabled": True
+    },
+    {
+        "role": "general_plugin",
+        "relative_import_name": ".plugins.invoker",
+        "class_name": "CoreInvoker",
         "enabled": True,
     },
 ]

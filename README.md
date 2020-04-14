@@ -3,8 +3,8 @@ TimeWalk
 [![Build Status](https://travis-ci.org/desmondlzy/timewalk-core.svg?branch=master)](https://travis-ci.org/desmondlzy/timewalk-core)
 [![Coverage Status](https://coveralls.io/repos/github/desmondlzy/timewalk-core/badge.svg?branch=dev)](https://coveralls.io/github/desmondlzy/timewalk-core?branch=dev)
 
-This is the core program of TimeWalk, a free, extensible software that helps you track you coding statistics.
-Everything is done locally and you have full control of your own data.
+This is the core program of TimeWalk, a [free](https://www.gnu.org/philosophy/free-sw.en.html), extensible software 
+that helps you track you coding statistics. Everything is done locally and you have full control of your own data.
 
 The core hosted in this repo provides you with a command line interface to invoke TimeWalk.
 
@@ -114,4 +114,4 @@ tox
 
 License
 -----------
-BSD 3-Clause
+MIT License
