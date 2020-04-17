@@ -8,7 +8,7 @@ that helps you track you coding statistics. Everything is done locally and you h
 
 The core hosted in this repo provides you with a command line interface to invoke TimeWalk.
 
-To make TimeWalk work, find a plugin for your text editor (VS Code coming soon).
+To make TimeWalk work, find the corresponding plugin for your [text editor](#supported-editor).
 
 
 Installation
@@ -16,7 +16,7 @@ Installation
 
 Note: General users should **not** directly install the plugin from here.
 
-Your text editor plugins (on their way) will download the core upon their installation or activation.
+Your [text editor plugins](#supported-editor) will download the core upon their installation or activation.
 Then the core will be invoked by the editor plugins via command line interface and make all the magic happen.
 
 For plugin developers who may want to get the core program.
@@ -50,6 +50,10 @@ timewalk query
 ```
 
 For more usage, ``timewalk --help`` get your the command line arguments help.
+
+Supported Editor
+---------------------
+- [VSCode](https://github.com/desmondlzy/timewalk-vscode)
 
 
 Plugins
@@ -97,11 +101,11 @@ functionality as TimeWalk does. I very appreciate their work, but on the other h
 
 - Users may not send their data to a third party to get their stats. 
 - Users may not pay to get their stats.
-- Users may freely customize what kind of stats they intend to track. 
+- Users may freely customize what kind of stats they want to track. 
 
 These simple beliefs are really what motivates TimeWalk. 
-If you feel the same way as I do, please leave your precious commments.
-Your suggestions/feature request/code contribution would be appreicated. 
+If you feel the same way as I do, please leave your precious comment.
+Your suggestions/feature request/code contribution would be appreciated. 
 I believe your ideas will make TimeWalk better, as well as our open-source community.
 
 Testing
